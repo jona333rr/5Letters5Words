@@ -2,8 +2,10 @@
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 
-string[] PerfectWords = File.ReadAllLines("./new_beta.txt");
-string[] ImPerfectWords = File.ReadAllLines("./imperfectData.txt");
+//Jeg har forsøgt at tjekke næste ord med forrige ord, for at der ikke bliver gentaget samme bogstaver i næste ord, som allerede er nævnt i forrige.
+
+
+string[] ImPerfectWords = File.ReadAllLines("./new_beta.txt");
 
 
 
@@ -39,21 +41,36 @@ for (int i = 0; i < ImPerfectWords.Length; i++)
 
     }
 }
-
-for (int k = 0; k < CorrectWords.Count - 1; k++)
+for (int k = 0; k < CorrectWords.Count; k++)
 {
-    List<char> chars = new List<char>();
-    
-
-    string word = CorrectWords[k];
-    string word2 = CorrectWords[k + 1];
-
-
-    for (int j = 0; j < word.Length; j++)
+    for (int j = k + 1; j < CorrectWords.Count; j++)
     {
+        var matching = string.Concat(CorrectWords[k], CorrectWords[j]);
+        if (matching.Distinct().Count() != 10) continue;
 
+        for (int n = j + 1; n < CorrectWords.Count; n++)
+        {
+            var matching2 = string.Concat(CorrectWords[n], CorrectWords[k], CorrectWords[j]);
+
+            if (matching2.Distinct().Count() != 15) continue;
+            
+            for (int o = n + 1; o < CorrectWords.Count; o++)
+            {
+                var matching3 = string.Concat(CorrectWords[o], CorrectWords[n], CorrectWords[k], CorrectWords[j]);
+
+                if (matching3.Distinct().Count() != 20) continue;
+
+                for (int p = o + 1; p < CorrectWords.Count; p++)
+                {
+                    var matching4 = string.Concat(CorrectWords[p], CorrectWords[o], CorrectWords[n], CorrectWords[k], CorrectWords[j]);
+
+                    if (matching4.Distinct().Count() != 25) continue;
+
+                    Console.WriteLine(matching4);
+                }
+            }
+        }
     }
-
 }
 
 
