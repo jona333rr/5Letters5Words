@@ -3,10 +3,9 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-//Jeg har forsøgt at tjekke næste ord med forrige ord, for at der ikke bliver gentaget samme bogstaver i næste ord, som allerede er nævnt i forrige.
+//Jeg skal til at i gang med at lave bitMap. 
 
-
-string[] _imPerfectWords = File.ReadAllLines("./words_alpha.txt");
+string[] _imPerfectWords = File.ReadAllLines("./new_beta.txt");
 
 
 
@@ -51,37 +50,7 @@ for (int i = 0; i < _imPerfectWords.Length; i++)
 
     }
 }
-//for (int k = 0; k < _perfectWords.Count; k++)
-//{
-//    for (int j = k + 1; j < _perfectWords.Count; j++)
-//    {
-//        var matching = string.Concat(_perfectWords[k], _perfectWords[j]);
-//        if (matching.Distinct().Count() != 10) continue;
 
-//        for (int n = j + 1; n < _perfectWords.Count; n++)
-//        {
-//            var matching2 = string.Concat(_perfectWords[k], _perfectWords[j], _perfectWords[n]);
-
-//            if (matching2.Distinct().Count() != 15) continue;
-            
-//            for (int o = n + 1; o < _perfectWords.Count; o++)
-//            {
-//                var matching3 = string.Concat(_perfectWords[k], _perfectWords[j], _perfectWords[n], _perfectWords[o]);
-
-//                if (matching3.Distinct().Count() != 20) continue;
-
-//                for (int p = o + 1; p < _perfectWords.Count; p++)
-//                {
-//                    var matching4 = string.Concat(_perfectWords[k], _perfectWords[j], _perfectWords[n], _perfectWords[o], _perfectWords[p]);
-
-//                    if (matching4.Distinct().Count() != 25) continue;
-                    
-//                    Console.WriteLine(string.Join(" ", _perfectWords[k], _perfectWords[j], _perfectWords[n], _perfectWords[o], _perfectWords[p]));
-//                }
-//            }
-//        }
-//    }
-//}
 
 const int wordCount = 5;
 int solutions = 0;
@@ -100,6 +69,7 @@ void matchingWords(string[] words, int wordCount, int index, List<string> select
         if ( string.Concat(string.Join("", selectedWords), words[i]).Distinct().Count() != 5 * (selectedWords.Count + 1)) continue;
         List<string> nextSelectedWord = new List<string>(selectedWords);
         nextSelectedWord.Add(words[i]);
+        
         matchingWords(words, wordCount, i, nextSelectedWord);
         
     }
