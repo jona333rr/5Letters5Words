@@ -8,4 +8,4 @@ using _5Letters5Words;
 
 
 
-BenchmarkRunner.Run<a5Letters5Words>();
+BenchmarkRunner.Run<a5Letters5Words >();
